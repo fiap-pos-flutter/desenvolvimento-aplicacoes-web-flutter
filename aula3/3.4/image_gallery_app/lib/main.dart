@@ -4,18 +4,21 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'image_gallery.dart';
 
+const String firebaseAppName = 'web';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var config = const FirebaseOptions(
-    apiKey: 'AIzaSyDYyaV4ih52UM3z9aqJmT-pZqGtYY7HjCI',
-    authDomain: 'fiap-post-flutter.firebaseapp.com',
-    appId: '1:107757801504:web:3ebc12624b49663b066c45',
-    messagingSenderId: '107757801504',
-    projectId: 'fiap-post-flutter',
-    storageBucket: 'fiap-post-flutter.appspot.com',
+    apiKey: "AIzaSyDYyaV4ih52UM3z9aqJmT-pZqGtYY7HjCI",
+    authDomain: "fiap-post-flutter.firebaseapp.com",
+    projectId: "fiap-post-flutter",
+    storageBucket: "fiap-post-flutter.appspot.com",
+    messagingSenderId: "107757801504",
+    appId: "1:107757801504:web:3ebc12624b49663b066c45",
   );
 
   await Firebase.initializeApp(
+    name: firebaseAppName,
     options: config,
   );
 

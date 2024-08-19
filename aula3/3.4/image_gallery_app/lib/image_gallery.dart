@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_gallery_app/extensions/context_extension.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
@@ -36,7 +37,9 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
   // Função para fazer upload da imagem selecionada para o Firebase Storage
   Future<void> _uploadImage() async {
     try {
-      final storageRef = FirebaseStorage.instance.ref();
+      final instance = Firebase.app(firebaseAppName);
+      final storageRef = FirebaseStorage.instanceFor(app: instance).ref();
+
       final imagesRef = storageRef.child('images/$_imageName');
       final uploadTask = imagesRef.putBlob(
         _imageBlob!,
@@ -47,8 +50,10 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
         loading = true;
       });
 
-      final snapshot = await uploadTask.whenComplete(() => null);
-      await snapshot.ref.getDownloadURL();
+      await uploadTask.whenComplete(() => null);
+      
+      //final snapshot = await uploadTask.whenComplete(() => null);
+      //await snapshot.ref.getDownloadURL();
 
       setState(() {
         loading = false;
