@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+## Test execution
+flutter test test/unit_test.dart
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
