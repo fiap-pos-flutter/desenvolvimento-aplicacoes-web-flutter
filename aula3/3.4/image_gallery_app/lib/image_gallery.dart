@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'main.dart';
+
 class ImageGalleryApp extends StatefulWidget {
   @override
   _ImageGalleryAppState createState() => _ImageGalleryAppState();
@@ -58,11 +60,36 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
     }
   }
 
+  void _changeLanguage(Locale locale) {
+    setState(() {
+      MyApp.setLocale(context, locale);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image Gallery'),
+        title: Text(AppLocalizations.of(context)!.title),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (String value) {
+              if (value == 'English') {
+                _changeLanguage(const Locale('en'));
+              } else if (value == 'Português') {
+                _changeLanguage(const Locale('pt'));
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return {'English', 'Português'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -74,12 +101,12 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
                     width: 200,
                     height: 200,
                   )
-                : const Text('No image selected.'),
+                : Text(AppLocalizations.of(context)!.no_image_selected),
             ElevatedButton(
               onPressed: _pickImage,
-              child: Text(AppLocalizations.of(context)!.title),
+              child: Text(AppLocalizations.of(context)!.select_image),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 10),
             if (_imageBlob != null)
               ElevatedButton(
                 onPressed: () async {
@@ -89,11 +116,11 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
                 },
                 child: const Text('Fazer Upload'),
               ),
-              const SizedBox(height: 10,),
+            const SizedBox(height: 10),
             if (loading != null && loading == true)
               const CircularProgressIndicator(),
             if (loading != null && loading == false)
-              const Text('Imagem enviada com sucesso!'),
+              Text(AppLocalizations.of(context)!.image_uploaded),
           ],
         ),
       ),
