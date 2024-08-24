@@ -51,7 +51,7 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
       });
 
       await uploadTask.whenComplete(() => null);
-      
+
       //final snapshot = await uploadTask.whenComplete(() => null);
       //await snapshot.ref.getDownloadURL();
 
@@ -71,12 +71,26 @@ class _ImageGalleryAppState extends State<ImageGalleryApp> {
     });
   }
 
+  void _changeTheme(ThemeData theme) {
+    MyApp.setTheme(context, theme);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.title),
         actions: [
+          IconButton(
+            icon: Icon(Icons.brightness_6),
+            onPressed: () {
+              if (Theme.of(context).brightness == Brightness.dark) {
+                _changeTheme(lightTheme);
+              } else {
+                _changeTheme(darkTheme);
+              }
+            },
+          ),
           PopupMenuButton<String>(
             onSelected: (String value) {
               if (value == 'English') {
