@@ -6,6 +6,26 @@ import 'image_gallery.dart';
 
 const String firebaseAppName = 'web';
 
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.blue,
+  //accentColor: Colors.blueAccent,
+  buttonTheme: ButtonThemeData(
+    buttonColor: Colors.blue,
+    textTheme: ButtonTextTheme.primary,
+  ),
+);
+
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Colors.grey[900],
+  //accentColor: Colors.blueGrey,
+  buttonTheme: ButtonThemeData(
+    buttonColor: Colors.blueGrey,
+    textTheme: ButtonTextTheme.primary,
+  ),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var config = const FirebaseOptions(
@@ -26,6 +46,11 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  static void setTheme(BuildContext context, ThemeData theme) {
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    state?.changeTheme(theme);
+  }
+
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.changeLocale(newLocale);
@@ -37,6 +62,13 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale = const Locale('pt');
+  ThemeData _themeData = lightTheme;
+
+  void changeTheme(ThemeData theme) {
+    setState(() {
+      _themeData = theme;
+    });
+  }
 
   void changeLocale(Locale locale) {
     setState(() {
@@ -49,6 +81,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: ImageGalleryApp(),
       locale: _locale,
+      theme: _themeData,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
