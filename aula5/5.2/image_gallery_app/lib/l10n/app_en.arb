@@ -1,0 +1,8 @@
+{
+  "@@locale": "en",
+  "title": "Image Gallery",
+  "select_image": "Select Image",
+  "upload_image": "Upload Image",
+  "no_image_selected": "No image selected.",
+  "image_uploaded": "Image uploaded successfully!"
+}
