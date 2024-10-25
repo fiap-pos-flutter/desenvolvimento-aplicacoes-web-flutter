@@ -1,16 +1,7 @@
 # image_gallery_app
 
-A new Flutter project.
+Type "cd ~/" to go to your home folder.
+Type "touch .zprofile" to create your new file.
+Type “open .zprofile” to open it in default text editor.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+export PATH="$PATH:/Users/felipeaugusto/Development/frameworks/flutter/bin"

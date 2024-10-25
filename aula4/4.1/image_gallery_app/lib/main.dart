@@ -7,22 +7,34 @@ import 'image_gallery.dart';
 const String firebaseAppName = 'web';
 
 final ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
   primaryColor: Colors.blue,
-  //accentColor: Colors.blueAccent,
-  buttonTheme: ButtonThemeData(
-    buttonColor: Colors.blue,
-    textTheme: ButtonTextTheme.primary,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white,
+    ),
+  ),
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 32,
+      color: Colors.pink,
+    ),
   ),
 );
 
 final ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primaryColor: Colors.grey[900],
-  //accentColor: Colors.blueGrey,
-  buttonTheme: ButtonThemeData(
-    buttonColor: Colors.blueGrey,
-    textTheme: ButtonTextTheme.primary,
+  primaryColor: Colors.black,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.black,
+      foregroundColor: Colors.white,
+    ),
+  ),
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 32,
+      color: Colors.grey,
+    ),
   ),
 );
 

@@ -18,33 +18,33 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Image Gallery'),
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          if (constraints.maxWidth < 600) {
+            return ListView(
+              children: _buildImageList(),
+            );
+          } else {
+            return GridView.count(
+              crossAxisCount: 3,
+              children: _buildImageList(),
+            );
+          }
+        },
+      ),
+    );
+  }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text('Image Gallery'),
-    ),
-    body: LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth < 600) {
-          return ListView(
-            children: _buildImageList(),
-          );
-        } else {
-          return GridView.count(
-            crossAxisCount: 3,
-            children: _buildImageList(),
-          );
-        }
-      },
-    ),
-  );
-}
-
-List<Widget> _buildImageList() {
-  return List.generate(10, (index) {
-    return Image.network('https://example.com/image$index.jpg');
-  });
-}
+  List<Widget> _buildImageList() {
+    return List.generate(10, (index) {
+      return Image.network(
+          'https://cdn.evolve-mma.com/wp-content/uploads/2015/05/why-bjj-is-the-perfect-martial-art.jpg');
+    });
+  }
 }
