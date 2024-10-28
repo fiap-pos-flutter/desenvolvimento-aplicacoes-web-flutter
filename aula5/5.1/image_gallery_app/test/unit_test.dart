@@ -10,41 +10,44 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image_gallery_app/core/file_validator.dart';
 
-//Just upload extension jpeg with 5 megabytes of limit
-
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  group('FileValidator', () {
-    test('Valida se o arquivo possui extensão .jpeg', () {
-      final fileName = 'imagem.jpeg';
-      final isValid = FileValidator.isJpeg(fileName);
-      expect(isValid, true);
-    });
+  test('1 - Valida se o arquivo possui extensao .jpeg', () {
+    final fileName = "image.jpeg";
+    final isValid = FileValidator.isJpeg(fileName);
+    expect(isValid, true);
+  });
 
-    test('Valida se o tamanho do arquivo não excede 5 MB', () {
-      final fileBytes = Uint8List(FileValidator.maxFileSize);
-      final isValid = FileValidator.isFileSizeValid(fileBytes);
-      expect(isValid, true);
-    });
+  test('2 - Valida se o arquivo possui extensao .jpeg', () {
+    final fileName = "image.png";
+    final isValid = FileValidator.isJpeg(fileName);
+    expect(isValid, false);
+  });
 
-    test('Retorna falso para arquivos maiores que 5 MB', () {
-      final fileBytes = Uint8List(FileValidator.maxFileSize + 1);
-      final isValid = FileValidator.isFileSizeValid(fileBytes);
-      expect(isValid, false);
-    });
+  test('Valida se o tamanho do arquivo nao excede 5 MB', () {
+    final fileBytes = Uint8List(FileValidator.maxFileSize);
+    final isValid = FileValidator.isFileSizeValid(fileBytes);
+    expect(isValid, true);
+  });
 
-    test('Valida a função completa de validação de arquivo', () {
-      final fileBytes = Uint8List(FileValidator.maxFileSize);
-      final fileName = 'imagem.jpeg';
-      final isValid = FileValidator.validateFile(fileBytes, fileName);
-      expect(isValid, true);
-    });
+  test('Retorna false para arquvos maiores que 5 MB', () {
+    final fileBytes = Uint8List(FileValidator.maxFileSize + 1);
+    final isValid = FileValidator.isFileSizeValid(fileBytes);
+    expect(isValid, false);
+  });
 
-    test('Retorna falso para uma extensão inválida', () {
-      final fileBytes = Uint8List(FileValidator.maxFileSize);
-      final fileName = 'imagem.png';
-      final isValid = FileValidator.validateFile(fileBytes, fileName);
-      expect(isValid, false);
-    });
+  test('1 - Valida a funcao completa de validacao de arquivo', () {
+    final fileBytes = Uint8List(FileValidator.maxFileSize + 1);
+    final fileName = 'image.jpeg';
+
+    final isValid = FileValidator.validateFile(fileBytes, fileName);
+    expect(isValid, false);
+  });
+
+  test('2 - Valida a funcao completa de validacao de arquivo', () {
+    final fileBytes = Uint8List(FileValidator.maxFileSize);
+    final fileName = 'image.jpeg';
+
+    final isValid = FileValidator.validateFile(fileBytes, fileName);
+    expect(isValid, true);
   });
 }

@@ -28,7 +28,7 @@ void main() {
     expect(FileValidator.validateFile(fileBytes, filename), true);
   });
 
-    test('Verifica se a extensao do arquivo e JPEG - 2', () async {
+  test('Verifica se a extensao do arquivo e JPEG - 2', () async {
     const filename = 'example4.jpg';
 
     var data = await rootBundle.load('assets/$filename');
