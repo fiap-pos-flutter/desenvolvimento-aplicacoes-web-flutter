@@ -104,7 +104,6 @@ class _ImageGalleryState extends State<ImageGallery> {
                 ],
               ),
             ),
-            // Text(AppLocalizations.of(context)!.title),
           ],
         ),
         actions: [
@@ -173,6 +172,7 @@ class _ImageGalleryState extends State<ImageGallery> {
                                 children: [
                                   Icon(
                                     Icons.image,
+                                    size: 80,
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -231,16 +231,54 @@ class _ImageGalleryState extends State<ImageGallery> {
                           label:
                               Text(AppLocalizations.of(context)!.upload_image),
                         ),
-                      if (loading != null && loading == true)
-                        CircularProgressIndicator(),
-                      if (loading != null && loading == false)
-                        Text(AppLocalizations.of(context)!.image_uploaded)
+                      SizedBox(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
           ),
+          if (loading != null && loading == true)
+            Container(
+              color: Colors.black.withOpacity(0.6),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(26),
+                        child: Column(
+                          children: [
+                            const CircularProgressIndicator(
+                              color: Colors.blueAccent,
+                              strokeAlign: 5,
+                            ),
+                            const SizedBox(
+                              height: 45,
+                            ),
+                            Text(
+                              'Uploading...',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.blueGrey[800],
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
         ],
       ),
     );
