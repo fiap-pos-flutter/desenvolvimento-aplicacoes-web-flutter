@@ -1,28 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'image_gallery.dart';
 
-const String firebaseAppName = 'web';
-
-final ThemeData lightTheme = ThemeData(
-  primaryColor: Colors.blue,
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
-    ),
-  ),
-  textTheme: TextTheme(
-    titleLarge: TextStyle(
-      fontSize: 32,
-      color: Colors.pink,
-    ),
-  ),
-);
-
 final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
   primaryColor: Colors.black,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
@@ -38,20 +21,33 @@ final ThemeData darkTheme = ThemeData(
   ),
 );
 
+final ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.blue,
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.blue,
+      foregroundColor: Colors.white,
+    ),
+  ),
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontSize: 32,
+      color: Colors.pink,
+    ),
+  ),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var config = const FirebaseOptions(
-    apiKey: "AIzaSyDYyaV4ih52UM3z9aqJmT-pZqGtYY7HjCI",
-    authDomain: "fiap-post-flutter.firebaseapp.com",
-    projectId: "fiap-post-flutter",
-    storageBucket: "fiap-post-flutter.appspot.com",
-    messagingSenderId: "107757801504",
-    appId: "1:107757801504:web:3ebc12624b49663b066c45",
-  );
-
   await Firebase.initializeApp(
-    name: firebaseAppName,
-    options: config,
+    options: FirebaseOptions(
+      apiKey: "AIzaSyCwoPvRFTMnjoKFDr21uxyCNaCw3FhvlPE",
+      appId: "1:514779891364:web:210eec466b0db31b844831",
+      messagingSenderId: "514779891364",
+      projectId: "image-gallery-web",
+      storageBucket: "image-gallery-web.appspot.com",
+    ),
   );
 
   runApp(MyApp());
@@ -59,12 +55,12 @@ void main() async {
 
 class MyApp extends StatefulWidget {
   static void setTheme(BuildContext context, ThemeData theme) {
-    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    var state = context.findAncestorStateOfType<_MyAppState>();
     state?.changeTheme(theme);
   }
 
   static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
+    var state = context.findAncestorStateOfType<_MyAppState>();
     state?.changeLocale(newLocale);
   }
 
@@ -73,7 +69,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale? _locale = const Locale('pt');
+  Locale? _locale = const Locale('en');
   ThemeData _themeData = lightTheme;
 
   void changeTheme(ThemeData theme) {
@@ -82,16 +78,17 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void changeLocale(Locale locale) {
+  void changeLocale(Locale newLocale) {
     setState(() {
-      _locale = locale;
+      _locale = newLocale;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ImageGalleryApp(),
+      title: 'Image gallery app',
+      home: ImageGallery(),
       locale: _locale,
       theme: _themeData,
       debugShowCheckedModeBanner: false,
